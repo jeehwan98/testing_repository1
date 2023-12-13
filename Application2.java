@@ -1,88 +1,61 @@
-package com.ohgiraffers.section01.literal;
+package com.ohgiraffers.section05.typecasting;
 
 public class Application2 {
     public static void main(String[] args) {
-        System.out.println("==== 정수와 정수의 연산 ====");
-        System.out.println(123 + 456);
-        System.out.println(100 - 50);
-        System.out.println(10 * 20);
-        System.out.println(35 / 10); // only int is printed, not float or decimal points
-        System.out.println(35 % 10); // only prints out the remainder
-        System.out.println("123" + "456"); // numbers act as a string, therefore not adding up but together
+        /* [ 강제 형변환 ]
+        * 바꾸려는 자료형으로 캐스트 연산자를 이용하여 형변환한다.
+        * (바꿀자료형) 값;
+        *  */
+
+        /* 2-1. 큰 자료형에서 작은 자료형으로 변경 시 강제 형변환이 필요하다. */
+        /* 2-1-1. 정수끼리의 강제 형변환 */
+        long lnum = 8;
+//      int inum = lnum; // 데이터 손실 가능성이 있으므로 자동 형변환되지 않는다
+        int inum = (int) lnum;
+        short snum = (short) inum;
+        byte bnum = (byte) snum;
+
+        /* 2-1-2. 실수끼리의 강제 혀변환 */
+        double dnum = 8.0;
+//      float fnum = dnum; // 데이터 손실 가능성이 있으므로 컴파일 에러가 발생한다.
+        float fnum = (float) dnum;
+
+        /* 2-2. 실수를 정수로 변경 시 강제 형변환이 필요하다. */
+        float fnum2 = 4.0f;
+//      long lnum2 = fnum2; // add long just in front of the fnum2 to change float to long
+//        float는 4byte, long은 8byte임에도 자동 형변환 불가능하다. (소수점 자리 이하의 데이터 손실 가능성.)
+        long lnum2 = (long) fnum2;
 
 
-        System.out.println("==== 실수와 실수의 연산 ====");
-        System.out.println(1.23 + 4.56);
-        System.out.println(1.23 - 0.23);
-        System.out.println(1.23 * 10.0);
-        System.out.println(1.23 / 10.0);
-        System.out.println(1.23 % 1.0); // 약간의 오차가 생긴다.
+        /* 2-3. 문자형을 int형 미만 크기의 변수에 저장하려면 강제 형변환이 필요하다. */
+        char ch = 'a';
+//      short snum2 = ch; // 같은 2byte의 크기이지만, 부호비트로 인한 값의 범위가 다르기 때문에 강제 형변환이 필요하다.
+        short snum2 = (short) ch;
+        byte bnum2 = (byte) ch; //
 
-// 정수와 실수 연산의 결과는 항상 실수가 나온다
-        System.out.println("==== 정수와 실수의 연산 ====");
-        System.out.println(123 + 0.5);
-        System.out.println(123 - 0.5);
-        System.out.println(123 * 0.5);
-        System.out.println(123 / 0.5);
-        System.out.println(123 % 0.5);
+        /* (추가) 정수를 char 자료형에 강제 형변환해서 대입하기 */
+        int num1 = 97;
+        int num2 = -97;
 
+//      char ch2 = num1; // 큰 자료형 > 작은 자료형 ... 그렇기 때문에 강제 형변환을 해야한다.
+        char ch2 = (char) num1;
+        char ch3 = (char) num2; // 음수도 강제로 형변환 하면 대입을 할 수 있다
+        System.out.println("ch2 : " + ch2);
+        System.out.println("ch3 : " + ch3);
 
-        System.out.println("==== 문자와 문자의 연산 ====");
-        System.out.println('a' + 'b');
-        System.out.println('a' - 'b');
-        System.out.println('a' * 'b');
-        System.out.println('a' / 'b');
-        System.out.println('a' % 'b');
-//      *** ASCII code eg) a = 97, b = 98 *** 그렇기 때문에 연산이 가능하다
-
-//      동일함
-        System.out.println("==== 문자와 정수의 연산 ====");
-        System.out.println('a' + 1);
-        System.out.println('a' - 1);
-        System.out.println('a' * 1);
-        System.out.println('a' / 2);
-        System.out.println('a' % 2);
+        /* 2-4. 논리형은 강제 형변환 규칙에서도 제외된다. */
+        boolean isTrue = true;
+//      byte b = (byte) isTrue;
+//      short s = (short) isTrue;
+//      int i = (int) isTrue;
+//      float f = (float) isTrue;
+//      double d = (double) isTrue;
+//      char c = (char) isTrue;
+//      다 같은 이유로 실행이 되지 않는다
 
 
-        System.out.println("==== 문자와 실수의 연산 ====");
-        System.out.println('a' + 1.0);
-        System.out.println('a' - 1.0);
-        System.out.println('a' * 1.0);
-        System.out.println('a' / 2.0);
-        System.out.println('a' % 2.0);
 
 
-        System.out.println("==== 문자열과 문자열의 연산");
-        System.out.println("hello" + " " + "jee");
-//        System.out.println("hello" - "jee"); error
-//        System.out.println("hello" * "jee"); error
-//        System.out.println("hello" / "jee"); error
-//        System.out.println("hello" % "jee"); error
-
-
-        System.out.println("==== 문자열과 다른 형태의 값 연산 ====");
-        System.out.println("hello" + 123);
-        System.out.println("hello" + 123.456);
-        System.out.println("hello" + 'a');
-        System.out.println("hello" + true); //전부 문자로 처리가 된다
-
-
-        System.out.println("==== 논리와 논리의 연산");
-//        System.out.println(true + false); +,-,*,/,% 연산 cannot be applied to boolean
-//        System.out.println(true - false); //에러 발생
-//        System.out.println(true * false); //에러 발생
-//        System.out.println(true / false); //에러 발생
-//        System.out.println(true % false); //에러 발생
-
-
-        System.out.println("==== 논리와 정수의 연산");
-//      System.out.println(true + 1); //에러 발생
-//      System.out.println(true - 1); //에러 발생
-//      System.out.println(true * 1); //에러 발생
-//      System.out.println(true / 2); //에러 발생
-//      System.out.println(true % 2); //에러 발생
-
-        System.out.println(true + "a"); //논리 + 문자열만 연산이 가능하다
-    }
 
     }
+}
